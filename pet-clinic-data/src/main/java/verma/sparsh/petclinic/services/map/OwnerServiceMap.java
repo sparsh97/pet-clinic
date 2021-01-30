@@ -1,12 +1,12 @@
 package verma.sparsh.petclinic.services.map;
 
 import verma.sparsh.petclinic.model.Owner;
-import verma.sparsh.petclinic.services.CrudServices;
+import verma.sparsh.petclinic.services.OwnerService;
 
 import java.util.Set;
 
 
-public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements CrudServices<Owner, Long> {
+public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements OwnerService {
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -30,5 +30,10 @@ public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements C
     @Override
     public void deleteById(Long id) {
     super.deleteById(id);
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 }

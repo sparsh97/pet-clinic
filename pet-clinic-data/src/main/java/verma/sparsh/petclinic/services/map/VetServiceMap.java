@@ -1,11 +1,11 @@
 package verma.sparsh.petclinic.services.map;
 
 import verma.sparsh.petclinic.model.Vet;
-import verma.sparsh.petclinic.services.CrudServices;
+import verma.sparsh.petclinic.services.VetService;
 
 import java.util.Set;
 
-public class VetServiceMap extends AbstractMapService<Vet,Long> implements CrudServices<Vet,Long> {
+public class VetServiceMap extends AbstractMapService<Vet,Long> implements VetService {
     @Override
     public Set<Vet> findAll() {
         return super.findAll();
