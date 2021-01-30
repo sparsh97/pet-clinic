@@ -1,11 +1,12 @@
 package verma.sparsh.petclinic.services.map;
 
+import org.springframework.stereotype.Service;
 import verma.sparsh.petclinic.model.Owner;
 import verma.sparsh.petclinic.services.OwnerService;
 
 import java.util.Set;
 
-
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements OwnerService {
     @Override
     public Set<Owner> findAll() {

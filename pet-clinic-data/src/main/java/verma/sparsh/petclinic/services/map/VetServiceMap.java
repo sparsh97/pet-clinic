@@ -1,10 +1,11 @@
 package verma.sparsh.petclinic.services.map;
 
+import org.springframework.stereotype.Service;
 import verma.sparsh.petclinic.model.Vet;
 import verma.sparsh.petclinic.services.VetService;
 
 import java.util.Set;
-
+@Service
 public class VetServiceMap extends AbstractMapService<Vet,Long> implements VetService {
     @Override
     public Set<Vet> findAll() {

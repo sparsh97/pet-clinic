@@ -6,17 +6,16 @@ import verma.sparsh.petclinic.model.Owner;
 import verma.sparsh.petclinic.model.Vet;
 import verma.sparsh.petclinic.services.OwnerService;
 import verma.sparsh.petclinic.services.VetService;
-import verma.sparsh.petclinic.services.map.OwnerServiceMap;
-import verma.sparsh.petclinic.services.map.VetServiceMap;
 
 @Component
 public class DataLoader implements CommandLineRunner {
+
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    public DataLoader() {
-        ownerService= new OwnerServiceMap();
-        vetService = new VetServiceMap();
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override
