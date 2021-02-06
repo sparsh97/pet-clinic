@@ -2,12 +2,24 @@ package verma.sparsh.petclinic.services.map;
 
 import org.springframework.stereotype.Service;
 import verma.sparsh.petclinic.model.Owner;
+import verma.sparsh.petclinic.model.Pet;
 import verma.sparsh.petclinic.services.OwnerService;
+import verma.sparsh.petclinic.services.PetService;
+import verma.sparsh.petclinic.services.PetTypeService;
 
 import java.util.Set;
 
 @Service
-public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements OwnerService {
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+
+    private final PetService petService;
+    private final PetTypeService petTypeService;
+
+    public OwnerServiceMap(PetService petService, PetTypeService petTypeService) {
+        this.petService = petService;
+        this.petTypeService = petTypeService;
+    }
+
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -20,7 +32,27 @@ public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements O
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object);
+
+        if (object != null) {
+            if (object.getPets() != null) {
+                object.getPets().forEach(pet -> {
+                    if (pet.getPetType() != null) {
+                        if (pet.getPetType().getId() == null) {
+                            pet.setPetType(petTypeService.save(pet.getPetType()));
+                        } else {
+                            throw new RuntimeException("PetType is required....");
+                        }
+                        if (pet.getId() == null) {
+                            Pet savePet = petService.save(pet);
+                            pet.setId(savePet.getId());
+                        }
+                    }
+                });
+            }
+            return super.save(object);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -30,7 +62,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements O
 
     @Override
     public void deleteById(Long id) {
-    super.deleteById(id);
+        super.deleteById(id);
     }
 
     @Override

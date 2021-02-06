@@ -3,11 +3,14 @@ package verma.sparsh.petclinic.bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import verma.sparsh.petclinic.model.Owner;
+import verma.sparsh.petclinic.model.Pet;
 import verma.sparsh.petclinic.model.PetType;
 import verma.sparsh.petclinic.model.Vet;
 import verma.sparsh.petclinic.services.OwnerService;
 import verma.sparsh.petclinic.services.PetTypeService;
 import verma.sparsh.petclinic.services.VetService;
+
+import java.time.LocalDate;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -24,16 +27,47 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        PetType dog= new PetType();
+        dog.setName("Shiro");
+        PetType saveDogPetType=petTypeService.save(dog);
+
+        PetType cat= new PetType();
+        dog.setName("billi");
+        PetType saveCatPetType=petTypeService.save(cat);
+
+        System.out.println("PetType Loaded.........");
+
+
         Owner owner1= new Owner();
         owner1.setId(1L);
         owner1.setFirstName("Sparsh");
         owner1.setLastName("Verma");
+        owner1.setAddress("Varanasi, India");
+        owner1.setCity("Varanasi");
+        owner1.setTelephone("123456789");
+
+        Pet sparshPet= new Pet();
+        sparshPet.setPetType(saveDogPetType);
+        sparshPet.setOwner(owner1);
+        sparshPet.setBirthDate(LocalDate.now());
+        sparshPet.setName("Doggy");
+        owner1.getPets().add(sparshPet);
         ownerService.save(owner1);
 
         Owner owner2= new Owner();
         owner2.setId(2L);
         owner2.setFirstName("Chhavinder");
         owner2.setLastName("Yadav");
+        owner2.setAddress("Varanasi, India");
+        owner2.setCity("Varanasi");
+        owner2.setTelephone("987456321");
+
+        Pet chhavinderPet= new Pet();
+        chhavinderPet.setPetType(saveCatPetType);
+        chhavinderPet.setOwner(owner2);
+        chhavinderPet.setBirthDate(LocalDate.now());
+        chhavinderPet.setName("CatName");
+        owner2.getPets().add(chhavinderPet);
         ownerService.save(owner2);
 
         System.out.println("Loaded owners...........");
@@ -51,17 +85,6 @@ public class DataLoader implements CommandLineRunner {
         vetService.save(net2);
 
         System.out.println("Vet Loaded.........");
-
-        PetType dog= new PetType();
-        dog.setName("Shiro");
-        PetType saveDogPetType=petTypeService.save(dog);
-
-        PetType cat= new PetType();
-        dog.setName("billi");
-        PetType saveCatPetType=petTypeService.save(cat);
-
-        System.out.println("PetType Loaded.........");
-
 
     }
 }

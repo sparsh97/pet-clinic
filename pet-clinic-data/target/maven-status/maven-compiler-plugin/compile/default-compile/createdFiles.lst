@@ -1,8 +1,11 @@
 verma\sparsh\petclinic\model\Pet.class
 verma\sparsh\petclinic\services\PetService.class
 verma\sparsh\petclinic\services\map\VetServiceMap.class
+verma\sparsh\petclinic\services\PetTypeService.class
 verma\sparsh\petclinic\services\map\AbstractMapService.class
+verma\sparsh\petclinic\services\map\PetTypeServiceMap.class
 verma\sparsh\petclinic\model\Person.class
+verma\sparsh\petclinic\model\Visit.class
 verma\sparsh\petclinic\services\map\OwnerServiceMap.class
 verma\sparsh\petclinic\model\Owner.class
 verma\sparsh\petclinic\model\BaseEntity.class
@@ -10,5 +13,6 @@ verma\sparsh\petclinic\services\VetService.class
 verma\sparsh\petclinic\model\PetType.class
 verma\sparsh\petclinic\model\Vet.class
 verma\sparsh\petclinic\services\OwnerService.class
+verma\sparsh\petclinic\model\Speciality.class
 verma\sparsh\petclinic\services\CrudServices.class
 verma\sparsh\petclinic\services\map\PetServiceMap.class
