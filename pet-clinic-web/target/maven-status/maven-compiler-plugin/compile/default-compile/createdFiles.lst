@@ -1,1 +1,5 @@
+verma\sparsh\petclinic\controllers\VetController.class
 verma\sparsh\petclinic\PetClinicApplication.class
+verma\sparsh\petclinic\bootstrap\DataLoader.class
+verma\sparsh\petclinic\controllers\IndexController.class
+verma\sparsh\petclinic\controllers\OwnerController.class
