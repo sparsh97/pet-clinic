@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'vets')}">
 <head>
     <meta charset="UTF-8">
     <title>Vets Index Page</title>
 </head>
 <body>
-    <h3 th:text="'Vets list Index'">Vets List Index....</h3>
-    <table>
+    <h3 th:text="'Vets list Index'">Vets List Index</h3>
+    <table class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>FirstName</th>
-            <th>LastName</th>
+            <th style="width: 150px;">ID</th>
+            <th style="width: 150px;">FirstName</th>
+            <th style="width: 150px;">LastName</th>
         </tr>
         </thead>
         <tbody>
