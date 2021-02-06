@@ -3,8 +3,10 @@ package verma.sparsh.petclinic.bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import verma.sparsh.petclinic.model.Owner;
+import verma.sparsh.petclinic.model.PetType;
 import verma.sparsh.petclinic.model.Vet;
 import verma.sparsh.petclinic.services.OwnerService;
+import verma.sparsh.petclinic.services.PetTypeService;
 import verma.sparsh.petclinic.services.VetService;
 
 @Component
@@ -12,10 +14,12 @@ public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetTypeService petTypeService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
@@ -47,6 +51,17 @@ public class DataLoader implements CommandLineRunner {
         vetService.save(net2);
 
         System.out.println("Vet Loaded.........");
+
+        PetType dog= new PetType();
+        dog.setName("Shiro");
+        PetType saveDogPetType=petTypeService.save(dog);
+
+        PetType cat= new PetType();
+        dog.setName("billi");
+        PetType saveCatPetType=petTypeService.save(cat);
+
+        System.out.println("PetType Loaded.........");
+
 
     }
 }
