@@ -2,12 +2,10 @@ package verma.sparsh.petclinic.bootstrap;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import verma.sparsh.petclinic.model.Owner;
-import verma.sparsh.petclinic.model.Pet;
-import verma.sparsh.petclinic.model.PetType;
-import verma.sparsh.petclinic.model.Vet;
+import verma.sparsh.petclinic.model.*;
 import verma.sparsh.petclinic.services.OwnerService;
 import verma.sparsh.petclinic.services.PetTypeService;
+import verma.sparsh.petclinic.services.SpecialityService;
 import verma.sparsh.petclinic.services.VetService;
 
 import java.time.LocalDate;
@@ -18,27 +16,43 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final SpecialityService specialityService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.specialityService = specialityService;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        PetType dog= new PetType();
-        dog.setName("Shiro");
-        PetType saveDogPetType=petTypeService.save(dog);
+        int count= petTypeService.findAll().size();
+        if(count == 0) {
+            loadDataOnStart();
+        }
+    }
 
-        PetType cat= new PetType();
+    private void loadDataOnStart() {
+        PetType dog = new PetType();
+        dog.setName("Shiro");
+        PetType saveDogPetType = petTypeService.save(dog);
+
+        PetType cat = new PetType();
         dog.setName("billi");
-        PetType saveCatPetType=petTypeService.save(cat);
+        PetType saveCatPetType = petTypeService.save(cat);
 
         System.out.println("PetType Loaded.........");
 
+        Speciality radiology = new Speciality();
+        radiology.setDescription("Radiology");
+        Speciality savedRadiology=specialityService.save(radiology);
 
-        Owner owner1= new Owner();
+        Speciality surgery = new Speciality();
+        surgery.setDescription("Surgery");
+        Speciality savedSurgery=specialityService.save(surgery);
+
+        Owner owner1 = new Owner();
         owner1.setId(1L);
         owner1.setFirstName("Sparsh");
         owner1.setLastName("Verma");
@@ -46,7 +60,7 @@ public class DataLoader implements CommandLineRunner {
         owner1.setCity("Varanasi");
         owner1.setTelephone("123456789");
 
-        Pet sparshPet= new Pet();
+        Pet sparshPet = new Pet();
         sparshPet.setPetType(saveDogPetType);
         sparshPet.setOwner(owner1);
         sparshPet.setBirthDate(LocalDate.now());
@@ -54,7 +68,7 @@ public class DataLoader implements CommandLineRunner {
         owner1.getPets().add(sparshPet);
         ownerService.save(owner1);
 
-        Owner owner2= new Owner();
+        Owner owner2 = new Owner();
         owner2.setId(2L);
         owner2.setFirstName("Chhavinder");
         owner2.setLastName("Yadav");
@@ -62,7 +76,7 @@ public class DataLoader implements CommandLineRunner {
         owner2.setCity("Varanasi");
         owner2.setTelephone("987456321");
 
-        Pet chhavinderPet= new Pet();
+        Pet chhavinderPet = new Pet();
         chhavinderPet.setPetType(saveCatPetType);
         chhavinderPet.setOwner(owner2);
         chhavinderPet.setBirthDate(LocalDate.now());
@@ -72,19 +86,20 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("Loaded owners...........");
 
-        Vet net1= new Vet();
+        Vet net1 = new Vet();
         net1.setId(1L);
         net1.setFirstName("Abhishek");
         net1.setLastName("Abhishek");
+        net1.getSpecialities().add(savedRadiology);
         vetService.save(net1);
 
-        Vet net2= new Vet();
+        Vet net2 = new Vet();
         net2.setId(2L);
         net2.setFirstName("Jeewan");
         net2.setLastName("Jeewan");
+        net2.getSpecialities().add(savedSurgery);
         vetService.save(net2);
 
         System.out.println("Vet Loaded.........");
-
     }
 }
