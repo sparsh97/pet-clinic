@@ -1,11 +1,13 @@
 package verma.sparsh.petclinic.services.map;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import verma.sparsh.petclinic.model.Visit;
 import verma.sparsh.petclinic.services.VisitService;
 
 import java.util.Set;
 @Service
+@Profile({"default","map"})
 public class VisitServiceMap extends AbstractMapService<Visit, Long> implements VisitService {
 
     @Override

@@ -1,5 +1,6 @@
 package verma.sparsh.petclinic.services.map;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import verma.sparsh.petclinic.model.Owner;
 import verma.sparsh.petclinic.model.Pet;
@@ -10,6 +11,7 @@ import verma.sparsh.petclinic.services.PetTypeService;
 import java.util.Set;
 
 @Service
+@Profile({"default","map"})
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     private final PetService petService;
