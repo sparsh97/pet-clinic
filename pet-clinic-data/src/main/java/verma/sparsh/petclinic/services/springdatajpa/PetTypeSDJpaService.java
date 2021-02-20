@@ -39,6 +39,7 @@ public class PetTypeSDJpaService implements PetTypeService {
         petTypeRepository.delete(object);
     }
 
+
     @Override
     public void deleteById(Long aLong) {
         petTypeRepository.deleteById(aLong);
