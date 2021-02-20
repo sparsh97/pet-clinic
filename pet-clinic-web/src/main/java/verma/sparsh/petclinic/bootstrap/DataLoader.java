@@ -88,6 +88,8 @@ public class DataLoader implements CommandLineRunner {
         catVisit.setDescription("Chhavinder Pet have some virlal health issue");
         catVisit.setDate(LocalDate.now());
          visitService.save(catVisit);
+        System.out.println("Added Visit................");
+
         System.out.println("Loaded owners...........");
 
         Vet net1 = new Vet();
