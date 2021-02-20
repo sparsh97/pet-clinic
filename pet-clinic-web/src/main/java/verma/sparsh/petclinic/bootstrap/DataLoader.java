@@ -3,10 +3,7 @@ package verma.sparsh.petclinic.bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import verma.sparsh.petclinic.model.*;
-import verma.sparsh.petclinic.services.OwnerService;
-import verma.sparsh.petclinic.services.PetTypeService;
-import verma.sparsh.petclinic.services.SpecialityService;
-import verma.sparsh.petclinic.services.VetService;
+import verma.sparsh.petclinic.services.*;
 
 import java.time.LocalDate;
 
@@ -17,12 +14,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private  final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -84,6 +83,11 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(chhavinderPet);
         ownerService.save(owner2);
 
+        Visit catVisit= new Visit();
+        catVisit.setPet(chhavinderPet);
+        catVisit.setDescription("Chhavinder Pet have some virlal health issue");
+        catVisit.setDate(LocalDate.now());
+         visitService.save(catVisit);
         System.out.println("Loaded owners...........");
 
         Vet net1 = new Vet();
