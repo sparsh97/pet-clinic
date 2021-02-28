@@ -14,6 +14,12 @@ import javax.persistence.Table;
 @Table(name = "specialities")
 public class Speciality extends BaseEntity {
 
+    @Builder
+    public Speciality(Long id, String description) {
+        super(id);
+        this.description = description;
+    }
+
     @Column(name = "description")
     private String description;
 }
